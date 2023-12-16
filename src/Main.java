@@ -11,5 +11,6 @@ public class Main {
         String replaced = doc.replace(word, "");
         int res = (doc.length() - replaced.length()) / word.length();
         System.out.println(res);
+        System.out.println("되돌린 후 다시 push");
     }
 }
