@@ -5,41 +5,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String now = sc.nextLine();
-        String salt = sc.nextLine();
-        String[] dividedNow = now.split(":");
-        String[] dividedSalt = salt.split(":");
-        int[] intNow = new int[dividedNow.length];
-        int[] intSalt = new int[dividedSalt.length];
-        int resHour = 0;
-        int resMinute = 0;
-        int resSecond = 0;
+        String[] current = sc.next().split(":");
+        String[] target = sc.next().split(":");
 
-        for (int i=0; i<dividedNow.length; i++) {
-            intNow[i] = Integer.parseInt(dividedNow[i]);
-            intSalt[i] = Integer.parseInt(dividedSalt[i]);
-        }
+        int currentHour = Integer.parseInt(current[0]);
+        int currentMinute = Integer.parseInt(current[1]);
+        int currentSecond = Integer.parseInt(current[2]);
 
-        if (intSalt[0] - intNow[0] < 0) {
-            resHour = (24 - intNow[0] + intSalt[0]);
-        } else {
-            resHour = (intSalt[0] - intNow[0]);
-        }
+        int targetHour = Integer.parseInt(target[0]);
+        int targetMinute = Integer.parseInt(target[1]);
+        int targetSecond = Integer.parseInt(target[2]);
 
-        if (intSalt[1] - intNow[1] < 0) {
-            resHour--;
-            resMinute = (60 - intNow[1] + intSalt[1]);
-        } else {
-            resMinute = (intSalt[1] - intNow[1]);
-        }
+        int currentSecondAmount = currentHour * 3600 + currentMinute * 60 + currentSecond;
+        int targetSecondAmount = targetHour * 3600 + targetMinute * 60 + targetSecond;
 
-        if (intSalt[2] - intNow[2] < 0) {
-            resMinute--;
-            resSecond = (60 - intNow[2] + intSalt[2]);
-        } else {
-            resMinute = (intSalt[2] - intNow[2]);
-        }
+        int NeedSecondAmount = targetSecondAmount - currentSecondAmount;
+        if (NeedSecondAmount <= 0) NeedSecondAmount += 24 * 3600;
 
-        System.out.printf("%02d:%02d:%02d", resHour, resMinute, resSecond);
+        int needHour = NeedSecondAmount / 3600;
+        int needMinute = (NeedSecondAmount % 3600) / 60;
+        int needSecond = NeedSecondAmount % 60;
+
+        System.out.println(String.format("%02d:%02d:%02d", needHour, needMinute, needSecond));
     }
 }
