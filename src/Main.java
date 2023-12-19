@@ -1,27 +1,24 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] arr = new int[10];
-        for (int i=0; i<10; i++) {
-            int tmp = sc.nextInt()%42;
-            arr[i] = tmp;
+        int[] num = new int[8];
+        for (int i=0; i<8; i++) {
+            num[i] = sc.nextInt();
         }
-
-        int cnt = 10;
-
-        for (int i=0; i<10; i++) {
-            for (int j=0; j<10; j++) {
-                if (i != j && arr[i] != -1 && arr[j] != -1) {
-                    if (arr[i] == arr[j]) {
-                        arr[j] = -1;
-                        cnt--;
-                    }
-                }
+        String res = "";
+        for (int i=0; i<7; i++) {
+            if (num[i] - num[i+1] != 1 && num[i] - num[i+1] != -1) {
+                res = "mixed";
+                break;
+            } else if (num[i] - num[i+1] == 1) {
+                res = "descending";
+            } else {
+                res = "ascending";
             }
         }
-
-        System.out.println(cnt);
+        System.out.println(res);
     }
 }
